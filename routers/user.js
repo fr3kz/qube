@@ -6,9 +6,9 @@ const validation = require("../validator/index");
 
 const usercontroller = require("../controllers/user");
 
-router.post("/signup" ,validation.createUserSignupValidation,authcontroller.signup);
-router.post("/signin",authcontroller.signin);
-router.get("/signout",authcontroller.signout);
+router.get("/users",usercontroller.allUsers);
+router.get("/users/:userId",authcontroller.requireSignin,usercontroller.getUser);
+router.put("/users/:userId",authcontroller.requireSignin,usercontroller.updateUser);
 
 router.param("userId", usercontroller.userById);
 

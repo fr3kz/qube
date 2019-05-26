@@ -3,9 +3,10 @@ const postController = require('../controllers/post');
 const validator = require('../validator');
 const authcontroller = require("../controllers/auth");
 const router = express.Router();
+const usercontroller = require("../controllers/user");
 
-router.get("/",authcontroller.requireSignin ,postController.getPosts);
-router.post("/post" ,validator.createPostValidator,postController.createPost);
+router.get("/",postController.getPosts);
+router.post("/post",authcontroller.requireSignin  ,validator.createPostValidator,postController.createPost);
 
-
-module.exports = router;
+router.param("userId", usercontroller.userById);
+module.exports = router; 

@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 
 const postRoutes = require('./routers/post');
 const authRoutes = require('./routers/auth');
+const userRoutes = require('./routers/user');
 
 const MONGO_URI = "mongodb://fr3kz:BIko0230@ds155396.mlab.com:55396/qube";
 const mongoose = require("mongoose");
@@ -24,6 +25,11 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
-
+app.use("/", userRoutes);
+app.use(function (err,req,res,next){
+    if(err.name === "UnauthorizedError"){
+        res.status(401).json({error:"unauth"})
+    }
+});
 
 app.listen(8080);

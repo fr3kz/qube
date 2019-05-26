@@ -47,5 +47,6 @@ exports.signout = (req,res) => {
 }
 
 exports.requireSignin = expressJwt({
-    secret: SKEY
+    secret: SKEY,
+    userProperty: "auth"
 });
