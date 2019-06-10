@@ -1,20 +1,26 @@
 const mongoose = require("mongoose");
+const {ObjectId} = mongoose.Schema
 
 const postSchema = new mongoose.Schema({
     title: {
-        type:String,
-        /*required: "Title is required",
-        minlength: 4,
-        maxlength: 20, */
-        
+        type:String,   
         required: true
     },
     body: {
         type:String,
-      /*  required: "Title is required",
-        minlength: 4,
-        maxlength: 200, */
         required: true
+    },
+    photo:{
+       data: Buffer,
+       contenType:String
+    },
+    postedBy: {
+        type: ObjectId,
+        ref: "User"
+    },
+    created:{
+        type: Date,
+        default: Date.now
     }
 });
 

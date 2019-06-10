@@ -9,6 +9,7 @@ const usercontroller = require("../controllers/user");
 router.get("/users",usercontroller.allUsers);
 router.get("/users/:userId",authcontroller.requireSignin,usercontroller.getUser);
 router.put("/users/:userId",authcontroller.requireSignin,usercontroller.updateUser);
+router.delete("/users/:userId",authcontroller.requireSignin,usercontroller.deleteUser);
 
 router.param("userId", usercontroller.userById);
 
