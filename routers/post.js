@@ -5,7 +5,7 @@ const validator = require('../validator');
 const authcontroller = require("../controllers/auth");
 const usercontroller = require("../controllers/user");
 
-router.get("/",postController.getPosts);    
+router.get("/posts",postController.getPosts);    
 router.post("/post/new/:userId",authcontroller.requireSignin,postController.createPost,validator.createPostValidator);
 router.get("/post/by/:userId",postController.postsByUser);
 router.delete("/post/:postId",authcontroller.requireSignin,postController.isPoster,postController.deletePost);

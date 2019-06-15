@@ -13,16 +13,31 @@ const userRoutes = require('./routers/user');
 const MONGO_URI = "mongodb://fr3kz:BIko0230@ds155396.mlab.com:55396/qube";
 const mongoose = require("mongoose");
 
+const fs = require('fs');
+const cors = require('cors');
+
 mongoose.connect(MONGO_URI,{ useNewUrlParser: true}).then( () => console.log('db connect'));
 mongoose.connection.on('error', err => {
     console.log(`db error ${err.message}`)
 });
 
 
+app.get('/', (req,res) => {
+    fs.readFile('docs/apiDocs.json', (err,data) => {
+        if(err){
+            res.status(400).json({error:err});
+        }
+
+        const docs = JSON.parse(data)
+        res.json(docs)
+    });
+});
+
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use(cookieParser());
+app.use(cors());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
 app.use("/", userRoutes);
