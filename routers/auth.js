@@ -6,7 +6,7 @@ const validation = require("../validator/index");
 
 const usercontroller = require("../controllers/user");
 
-router.post("/signup" ,validation.createUserSignupValidation,authcontroller.signup);
+router.post("/signup" /*,validation.createUserSignupValidation*/,authcontroller.signup);
 router.post("/signin",authcontroller.signin);
 router.get("/signout",authcontroller.signout);
 
