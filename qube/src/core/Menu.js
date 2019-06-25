@@ -52,8 +52,11 @@ const Menu = ({history}) => (
                       <a className="nav-link" style={isActive(history,"/signup")} onClick={() => signout(() => history.push('/'))} >SignOUT</a>
               </li>
               <li className="nav-item">
-                    <p className="nav-link">{isAuthenticated().user.name}</p>
+                   <Link className="nav-link" to={`/user/${isAuthenticated().user._id}`}>{`${isAuthenticated().user.name}'s profile`}</Link>
                 </li>
+                <li className="nav-item">
+                      <Link to="/users">Users</Link>
+              </li>
             </>
         )}
         </ul>
